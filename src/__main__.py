@@ -8,12 +8,13 @@
 from datetime import timedelta, datetime
 from pathlib import Path, PurePath, WindowsPath, PosixPath
 from random import randint
-#import tkinter.tix as tix
+# import tkinter.tix as tix
 from tkinter import filedialog, messagebox
 from tkinter import *
 from mixer import mixer
 import os
-
+import imgdata
+from imgdata import playicondata, stopicondata, seaenllogodata
 
 root = Tk()
 root.winfo_toplevel().title('Seattle ENL - Navarro 2018  -  Sound Player')
@@ -29,31 +30,27 @@ global nowPlaying
 _soundPlaying = 0
 minDelay = IntVar()  # default MIN delay between fx
 maxDelay = IntVar()  # default MAX delay between fx
-if os.name == 'nt':
-    play_icon = PhotoImage(file=Path('.','res','playicon.png'))
-    stop_icon = PhotoImage(file=Path('.' ,'res','stopicon.png'))
-    sea_icon = PhotoImage(file=Path('.','res','sea-enl-logo_icon.png'))
-else:
-    play_icon = PhotoImage(file=PosixPath('./res/playicon.png'))
-    stop_icon = PhotoImage(file=PosixPath('./res/stopicon.png'))
-    sea_icon = PhotoImage(file=PosixPath('./res/sea-enl-logo_icon.png'))
 
-#===============================================================================
+play_icon = PhotoImage(data=playicondata)
+stop_icon = PhotoImage(data=stopicondata)
+sea_icon = PhotoImage(data=seaenllogodata)
+
+#=========================================================================
 #   Call Mixer setup
-#===============================================================================
+#=========================================================================
 mix = mixer()
 
 
-#===============================================================================
+#=========================================================================
 #   Called on Click of 'Load directory'
-#===============================================================================
+#=========================================================================
 def fileBrowserCallback():
-    #===========================================================================
+    #=========================================================================
     # Pop up directory
     # select dialog
     # call get_dir to process selected directory
     # get selected path from file browser window
-    #===========================================================================
+    #=========================================================================
     d = filedialog.askdirectory(title="Select Sounds Directory", parent=root)
     print(d)
     if d == '':
@@ -61,16 +58,17 @@ def fileBrowserCallback():
     else:
         try:
             dpath = Path(d)
-            if dpath.exists() :  get_dir(d)
+            if dpath.exists():
+                get_dir(d)
             else:
                 gui_raise("Directory {} doesn't exist".format(dpath))
         except Exception as e:
             print(e)
 
 
-#===============================================================================
+#=========================================================================
 # Return all files in selected folder/subdirs of correct filetype
-#===============================================================================
+#=========================================================================
 def get_dir(args):
     global listedFiles
     # # SET FILETYPE HERE
@@ -106,9 +104,9 @@ def get_dir(args):
         gui_raise(errmsg)
 
 
-#===============================================================================
+#=========================================================================
 #    PLAY BUTTON HANDLER
-#===============================================================================
+#=========================================================================
 def play_pushed(event=''):
     global _soundPlaying, minDelay, maxDelay, nextCue
     try:
@@ -144,9 +142,9 @@ def play_pushed(event=''):
             play_button.config(relief=FLAT, image=play_icon)
 
 
-#===============================================================================
+#=========================================================================
 #   SEND THE SOUND LIST TO THE PYGAME MIXER TO PLAY
-#===============================================================================
+#=========================================================================
 def play_loop():
     global listedFiles, nextCue, _soundPlaying
 
@@ -158,20 +156,20 @@ def play_loop():
             else:
                 pass
         except TypeError:
-                play_pushed()
-                print("Playback stopped - you put in a bad delay value\n")
-                print("Press play again to resume")
+            play_pushed()
+            print("Playback stopped - you put in a bad delay value\n")
+            print("Press play again to resume")
     else:
         pass
 
 
-#===============================================================================
+#=========================================================================
 #   splitting out function to set a new fx play cue
 #   Returns datetime for nextCUE
 #   - call new_cue(x) to return a cue in exactly x seconds
 #   - call with (minD, maxD) to return a cue in random secs in range(minD,maxD)
 #   - call with new_cue() to get a cue for now
-#===============================================================================
+#=========================================================================
 def new_cue(minD=0, maxD=0, **options):
     if (minD < 0) or (maxD < 0):
         gui_raise("Invalid new_cue: minD & maxD cannot be negative")
@@ -192,16 +190,16 @@ def new_cue(minD=0, maxD=0, **options):
         return nxtQ
 
 
-#===============================================================================
+#=========================================================================
 #   Macro for GUI Error Box
-#===============================================================================
+#=========================================================================
 def gui_raise(msg, title="Error"):
     messagebox.showerror(title, msg)
 
 
-#===============================================================================
+#=========================================================================
 #   Macro for quick entry box making
-#===============================================================================
+#=========================================================================
 def makeentry(parent, caption, width=None, **options):
     entry = Entry(parent, **options)
     if width:
@@ -211,14 +209,14 @@ def makeentry(parent, caption, width=None, **options):
     return entry
 
 
-#===============================================================================
+#=========================================================================
 #    MAIN
-#===============================================================================
+#=========================================================================
 if __name__ == '__main__':
 
     #==========================================================================
     #   GUI LAYOUT
-    #===========================================================================
+    #=========================================================================
 
     frame_top = Frame(root,
                       height=70,
@@ -228,7 +226,7 @@ if __name__ == '__main__':
 
     #==========================================================================
     #   TOP FRAME LAYOUT
-    #===========================================================================
+    #=========================================================================
     # BUTTON
     frame_loadbutton = Frame(frame_top)
     b1 = Button(frame_loadbutton,
@@ -237,8 +235,8 @@ if __name__ == '__main__':
     b1.pack(side=TOP)
     # CHECKBOX
     subdir_chkbox = Checkbutton(frame_loadbutton,
-                                    text='Include subdirectories',
-                                    variable=subdir_checkbox_val)
+                                text='Include subdirectories',
+                                variable=subdir_checkbox_val)
     # subdir_chkbox.select()
     subdir_chkbox.pack(side=BOTTOM)
     icon = Label(frame_top, image=sea_icon)
@@ -247,9 +245,9 @@ if __name__ == '__main__':
     icon.pack(side=RIGHT, fill=Y, expand=1)
     frame_top.pack(side=TOP, expand=1, fill=BOTH)
 
-    #===========================================================================
+    #=========================================================================
     #   FILES LIST LAYOUT
-    #===========================================================================
+    #=========================================================================
     list_scrollbar = Scrollbar(root, orient=VERTICAL)
     listbox = Listbox(root, width=75, height=40,
                       yscrollcommand=list_scrollbar.set)
@@ -257,21 +255,21 @@ if __name__ == '__main__':
     list_scrollbar.pack(side=RIGHT, fill=Y)
     listbox.pack(side=TOP, fill=BOTH, expand=1)
 
-    #===========================================================================
+    #=========================================================================
     #   PLAY BUTTON
-    #===========================================================================
+    #=========================================================================
     play_button = Button(root,
-                             image=play_icon,
-                             command=play_pushed,
-                             relief=FLAT,
-                             padx=5
-                             )
+                         image=play_icon,
+                         command=play_pushed,
+                         relief=FLAT,
+                         padx=5
+                         )
     play_button.config(borderwidth=5, default=NORMAL)
     play_button.pack(side=LEFT, padx=5)
 
-    #===========================================================================
+    #=========================================================================
     #   Min and Max Delay Boxes
-    #===========================================================================
+    #=========================================================================
     frame_dBox1 = Frame(root, padx=15, pady=5)
     minDbox = makeentry(frame_dBox1,
                         "Min delay (sec)",
@@ -288,14 +286,14 @@ if __name__ == '__main__':
     maxDelay.set("15")
     frame_dBox2.pack(fill=X, expand=1)
 
-    #===========================================================================
+    #=========================================================================
     #    keybinding
-    #===========================================================================
+    #=========================================================================
     root.bind("<space>", play_pushed)
 
-    #===========================================================================
+    #=========================================================================
     #     SHOOP DA LOOP [mainloop replacement]
-    #===========================================================================
+    #=========================================================================
 
     while True:
         mix.pywait(mils=10)

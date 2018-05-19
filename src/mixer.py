@@ -13,7 +13,6 @@ class mixer(object):
     classdocs
     '''
 
-
     def __init__(self):
         #
         #---PYGAME SOUNDS---------
@@ -24,7 +23,7 @@ class mixer(object):
         if pygame.mixer.get_init() == None:
             pygame.mixer.pre_init(44100, -16, 2, self._buf)
             pygame.mixer.init()
-        #audio params, time in ms
+        # audio params, time in ms
         self.fadeTime = 4000
         self.fx_vol = 1.0
 
@@ -32,7 +31,7 @@ class mixer(object):
         self.soundpath = str(random.choice(sounds))
         try:
             self.this_sound = pygame.mixer.Sound(self.soundpath)
-            self.this_sound.play(0,0,12)
+            self.this_sound.play(0, 0, 12)
 
             msg = ('Playing for {} seconds:\n{}')
             print(msg.format(
@@ -41,7 +40,6 @@ class mixer(object):
 
         except:
             print('Failed to play sound file')
-
 
     def stop_sound(self, fade=1000):
         try:
@@ -52,6 +50,6 @@ class mixer(object):
         except Exception:
             return 1
 
-    def pywait(self,mils):
+    def pywait(self, mils):
         pygame.time.wait(mils)
         return 0
