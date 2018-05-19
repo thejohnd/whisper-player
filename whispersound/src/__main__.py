@@ -3,10 +3,10 @@
 @author: John DeAscentis
 @title: TreeMixer
 @summary: Sound app for SEA-ENL project for Ingress Navarro 2018
-@version: 0.2b
+@version: 2b
 '''
 from datetime import timedelta, datetime
-from pathlib import Path, PurePath, PureWindowsPath
+from pathlib import Path, PurePath, WindowsPath, PosixPath
 from random import randint
 #import tkinter.tix as tix
 from tkinter import filedialog, messagebox
@@ -30,13 +30,13 @@ _soundPlaying = 0
 minDelay = IntVar()  # default MIN delay between fx
 maxDelay = IntVar()  # default MAX delay between fx
 if os.name == 'nt':
-    play_icon = PhotoImage(file=PureWindowsPath('./res/playicon.png'))
-    stop_icon = PhotoImage(file=PureWindowsPath('./res/stopicon.png'))
-    sea_icon = PhotoImage(file=PureWindowsPath('./res/sea-enl-logo_icon.png'))
+    play_icon = PhotoImage(file=Path('.','res','playicon.png'))
+    stop_icon = PhotoImage(file=Path('.' ,'res','stopicon.png'))
+    sea_icon = PhotoImage(file=Path('.','res','sea-enl-logo_icon.png'))
 else:
-    play_icon = PhotoImage(file=PureWindowsPath('./res/playicon.png'))
-    stop_icon = PhotoImage(file=PureWindowsPath('./res/stopicon.png'))
-    sea_icon = PhotoImage(file=PureWindowsPath('./res/sea-enl-logo_icon.png'))
+    play_icon = PhotoImage(file=PosixPath('./res/playicon.png'))
+    stop_icon = PhotoImage(file=PosixPath('./res/stopicon.png'))
+    sea_icon = PhotoImage(file=PosixPath('./res/sea-enl-logo_icon.png'))
 
 #===============================================================================
 #   Call Mixer setup
