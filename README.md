@@ -28,4 +28,6 @@ Issues:
 
 - The Windows exe gives an error and closes when you close it. Working as designed, the long way around?
 
+- If you want to build your own bdist, you'll need to do some tweaks to the setup.py to specify TCL & TK
+
 [enlhex128]: https://i.imgur.com/Wkz5R31.png

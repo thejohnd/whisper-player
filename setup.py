@@ -107,8 +107,8 @@ base = None
 if sys.platform == "win32":
     base = "Win32GUI"
 
-os.environ['TCL_LIBRARY'] = r'C:\tcl\tcl8.6'
-os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
+#os.environ['TCL_LIBRARY'] = r'C:\Python36-32\tcl\tcl8.6'
+#os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
 
 setup(name=NAME,
       version=about['__version__'],
