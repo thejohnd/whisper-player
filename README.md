@@ -10,7 +10,7 @@ v2.1
 
 .- **Python:** requires pygame & tkinter
 
-.- **Windows exe:** Download zip file from /dist folder, unzip, run main.exe
+.- **Windows exe:** Download zip file from /dist folder, unzip, run whisperplayer.exe
 ..- Windows zip doesn't require python installation
 
 
