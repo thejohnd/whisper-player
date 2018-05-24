@@ -21,7 +21,7 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
-    'pygame', 'tkinter', 'pathlib', 'random', 'datetime', 'os',
+    'cx_freeze','pygame', 'tkinter', 'pathlib', 'random', 'datetime', 'os',
 ]
 
 # The rest you shouldn't have to touch too much :)

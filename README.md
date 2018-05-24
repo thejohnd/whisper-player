@@ -13,6 +13,8 @@ v2.1
 .- **Windows exe:** Download zip file from /dist folder, unzip, run whisperplayer.exe
 ..- Windows zip doesn't require python installation
 
+.- **Ubuntu & Python:** Need to install python3-tk, python3-dev via your package manager. Then install cx_freeze via pip.
+
 
 1. Load Sounds using Load Directories button
 

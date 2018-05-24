@@ -49,6 +49,29 @@ class mixer(object):
             return 0
         except Exception:
             return 1
+    
+    def load_music(self, path):
+        try:
+            pygame.mixer.music.load(path)
+            return 0
+        except Exception:
+            print(('Failed to load music file\n{}').format(path))
+            return 1
+    
+    def play_music(self):
+        pygame.mixer.music.play(loops=-1, start=0_0)
+        
+    def pause_music(self):
+        pygame.mixer.music.pause()
+        
+    def unpause_music(self):
+        pygame.mixer.music.unpause()
+        
+    def stop_music(self):
+        pygame.mixer.music.stop()    
+    
+    def get_music_busy(self):
+        return pygame.mixer.music.get_busy()
 
     def pywait(self, mils):
         pygame.time.wait(mils)
