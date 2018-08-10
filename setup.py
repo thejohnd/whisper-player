@@ -5,7 +5,7 @@ import sys
 import os
 import io
 from shutil import rmtree
-from cx_Freeze import setup, Executable
+#from cx_Freeze import setup, Executable
 
 from setuptools import find_packages, setup, Command
 
@@ -21,7 +21,7 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
-    'cx_freeze','pygame', 'tkinter', 'pathlib', 'random', 'datetime', 'os',
+    'pygame', 'tkinter', 'pathlib', 'random', 'datetime', 'os',
 ]
 
 # The rest you shouldn't have to touch too much :)
