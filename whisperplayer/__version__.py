@@ -11,6 +11,6 @@
 #       Cool Kids use tuples I guess? So - tuple versioning:
 #          VERSION = (version number, 0 or 1 (0=test, 1=release), always 0)
 #=========================================================================
-VERSION = (2, 1, 0)
+VERSION = (3, 0, 0)
 
 __version__ = '.'.join(map(str, VERSION))

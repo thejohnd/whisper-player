@@ -1,27 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import sys
 import os
 import io
+import setuptools
 from shutil import rmtree
-from cx_Freeze import setup, Executable
+#from cx_freeze import setup, Executable
 
-from setuptools import find_packages, setup, Command
+
+try:
+    desc = open('README.md').read()
+except (IOError, ImportError):
+    desc = 'Randomized Sound Player for SEA-ENL Navarro 2018'
 
 # Package meta-data.
 NAME = 'whisperplayer'
 DESCRIPTION = 'Randomized Sound Player for SEA-ENL Navarro 2018'
+LONG_DESCRIPTION = desc
 URL = 'https://github.com/thejohnd/whisper-player'
-EMAIL = 'sparkoflife@gmail.com'
+EMAIL = 'johnd@robot-haus.net'
 AUTHOR = 'John D (@psyenceguy)'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    # 'requests', 'maya', 'records',
-    'cx_freeze','pygame', 'tkinter', 'pathlib', 'random', 'datetime', 'os',
+    # 'requests', 'maya', 'records', 'cx_freeze',
+    'pygame', 'tk', 'pathlib', 'datetime'
 ]
 
 # The rest you shouldn't have to touch too much :)
@@ -46,7 +53,7 @@ else:
     about['__version__'] = VERSION
 
 
-class UploadCommand(Command):
+class UploadCommand(setuptools.Command):
     """Support setup.py upload."""
 
     description = 'Build and publish the package.'
@@ -106,20 +113,25 @@ build_exe_options = {"includes": [
 base = None
 if sys.platform == "win32":
     base = "Win32GUI"
+if sys.platform == "win64":
+    base = "Win64GUI"
 
-#os.environ['TCL_LIBRARY'] = r'C:\Python36-32\tcl\tcl8.6'
-#os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
+os.environ['TCL_LIBRARY'] = r'C:\Python36-32\tcl\tcl8.6'
+os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
 
-setup(name=NAME,
+# chroot to not expose my home dir
+os.chdir(sys.path[0])
+
+setuptools.setup(name=NAME,
       version=about['__version__'],
       description=DESCRIPTION,
-      long_description=long_description,
+      long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     author=AUTHOR,
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=('tests',)),
+    packages=setuptools.find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
@@ -139,8 +151,8 @@ setup(name=NAME,
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
         ],
-    options={"build_exe": build_exe_options},
-    executables=[Executable("main.py", base=base)],
+    options={},
+    #executables=[cx_freeze.Executable("main.py", base=base)],
     # $ setup.py publish support.
     cmdclass={
         'upload': UploadCommand,
