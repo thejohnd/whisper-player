@@ -17,6 +17,9 @@ import imgdata as img
 root = Tk()
 root.winfo_toplevel().title('Seattle ENL - Navarro 2018  -  Sound Player')
 
+MINDELAY = '7'
+MAXDELAY = '35'
+
 subdir_checkbox_val = 1
 listboxvar = []
 global listedFiles  # list of the loaded files
@@ -338,7 +341,7 @@ if __name__ == '__main__':
                         "Min delay (sec)",
                         3,
                         textvariable=minDelay)
-    minDelay.set("2")
+    minDelay.set(MINDELAY)
     frame_dBox1.pack(fill=X, expand=1)
 
     frame_dBox2 = Frame(root, padx=15)
@@ -346,7 +349,7 @@ if __name__ == '__main__':
                         "Max delay (sec)",
                         3,
                         textvariable=maxDelay)
-    maxDelay.set("15")
+    maxDelay.set(MAXDELAY)
     frame_dBox2.pack(fill=X, expand=1)
 
     #===========================================================================

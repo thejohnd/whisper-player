@@ -116,11 +116,8 @@ if sys.platform == "win32":
 if sys.platform == "win64":
     base = "Win64GUI"
 
-os.environ['TCL_LIBRARY'] = r'C:\Python36-32\tcl\tcl8.6'
-os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
-
-# chroot to not expose my home dir
-os.chdir(sys.path[0])
+#os.environ['TCL_LIBRARY'] = r'C:\Python36-32\tcl\tcl8.6'
+#os.environ['TK_LIBRARY'] = r'C:\tcl\tk8.6'
 
 setuptools.setup(name=NAME,
       version=about['__version__'],
