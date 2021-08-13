@@ -97,3 +97,7 @@ ENV/
 # mypy
 .mypy_cache/
 whisperplayer/main.py
+
+# unshareable audio
+thorinair.mp3
+sound/lines/game_sfx/
