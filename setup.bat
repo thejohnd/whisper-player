@@ -8,7 +8,7 @@ IF /I "%AREYOUSURE%" NEQ "y" GOTO END
 
 @echo on
 python -m ensurepip --upgrade
-pip install pip setuptools wheel --upgrade
+pip install pip setuptools wheel pygame --upgrade
 python -m build
 pip install .
 @echo off
